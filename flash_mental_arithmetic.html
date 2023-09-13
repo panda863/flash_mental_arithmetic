@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>フラッシュ暗算(完成)</title>
+<style>
+/*html5doctor.com Reset Stylesheetv1.6.1Last Updated: 2010-09-17Author: Richard Clark - http://richclarkdesign.comTwitter: @rich_clark*/
+html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,abbr, address, cite, code,del, dfn, em, img, ins, kbd, q, samp,small, strong, sub, sup, var,b, i,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, figcaption, figure,footer, header, hgroup, menu, nav, section, summary,time, mark, audio, video {margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;vertical-align: baseline;background: transparent;}
+body {line-height: 1;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+nav ul {list-style: none;}
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after,q:before, q:after {content: '';content: none;}
+a {margin: 0;padding: 0;font-size: 100%;vertical-align: baseline;background: transparent;}
+/* change colours to suit your needs */
+ins {background-color: #ff9;color: #000;text-decoration: none;}
+/* change colours to suit your needs */
+mark {background-color: #ff9;color: #000;font-style: italic;font-weight: bold;}
+del {text-decoration: line-through;}
+abbr[title], dfn[title] {border-bottom: 1px dotted;cursor: help;}
+table {border-collapse: collapse;border-spacing: 0;}
+/* change border colour to suit your needs */
+hr {display: block;height: 1px;border: 0;border-top: 1px solid #cccccc;margin: 1em 0;padding: 0;}
+input, select {vertical-align: middle;}
+/*---------------reset.css END----------------------------------------*/
+
+.mondai{
+    display: flex;
+    justify-content: center;/* 左右中央 */
+    align-items: center;/* 上下中央 */
+    width:100%;
+    height:100vh;
+    background: #000;
+}
+.moji{
+    display: block;
+    width:max-content;
+    height:max-content;
+    font-size: 200px;
+    letter-spacing: 0.1em;
+    color:#00FF00;
+}
+.startBtn{
+    text-align: center;
+    margin-top:40px;
+}
+.startBtn button{
+    font-size: 50px;
+}
+.hidden{
+    display: none;
+}
+.reload{
+    display: flex;
+    justify-content: center;/* 左右中央 */
+    align-items: center;/* 上下中央 */
+    width:100vw;
+    height:100vh;
+    background: #000;
+}
+.retryBtn button{
+    font-size: 50px;
+}
+</style>
+</head>
+<body>
+    <div id="game">
+        <div class="mondai">
+            <div>
+                <span id="machine" class="moji">ﾌﾗｯｼｭ暗算</span>
+                <div class="startBtn">
+                    <button id="startBtn">スタート</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="retry" class="hidden">
+        <div class="reload">
+            <div class="retryBtn">
+                <button id="retryBtn">リトライ</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        i = 0;
+        kotae = 0;
+
+        startBtn.addEventListener('click',()=>{
+            function ten_random(){
+                const kazu = Math.floor(Math.random()*(100-10)+10);
+                console.log(kazu);
+                const machine = document.getElementById('machine');
+                machine.textContent=kazu;
+                kotae += kazu;
+                i++;
+                if(i>9){//9＝9000ミリ秒後に停止
+                clearInterval(timerID);
+                }
+            }
+            timerID = setInterval(ten_random,1000);
+
+            function finish(){
+                machine.textContent="終了";
+                
+                setTimeout(function (){
+                    console.log(kotae);
+                    function quiz(){
+                    answer=prompt("答えはいくつですか？");
+                        if(answer==kotae){
+                        alert("正解");
+                        }else{
+                        alert("不正解！答えは"+kotae+"です！");
+                        }
+                    }
+                    quiz();
+                    const game = document.getElementById('game');
+                    const retry = document.getElementById('retry');
+                    game.classList.add('hidden');
+                    retry.classList.remove('hidden');
+                },1000)
+            }
+            setTimerID = setTimeout(finish,11000);
+            
+        });
+
+        retryBtn.addEventListener('click',()=>{
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>
