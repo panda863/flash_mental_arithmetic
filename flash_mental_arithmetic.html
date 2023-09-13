@@ -34,10 +34,11 @@ input, select {vertical-align: middle;}
 }
 .moji{
     display: block;
-    width:max-content;
+    text-align: center;
+    width:100%;
     height:max-content;
     font-size: 10vw;
-    letter-spacing: 0.1em;
+    /* letter-spacing: 0.1em; */
     color:#00FF00;
 }
 .startBtn{
@@ -67,10 +68,11 @@ input, select {vertical-align: middle;}
     <div id="game">
         <div class="mondai">
             <div>
-                <span id="machine" class="moji">ﾌﾗｯｼｭ暗算</span>
+                <span id="machine" class="moji">ﾌﾗｯｼｭ暗算
                 <div class="startBtn">
                     <button id="startBtn">スタート</button>
                 </div>
+                </span>
             </div>
         </div>
     </div>
@@ -93,6 +95,7 @@ input, select {vertical-align: middle;}
                 console.log(kazu);
                 const machine = document.getElementById('machine');
                 machine.textContent=kazu;
+                machine.style.fontSize="30vw";
                 kotae += kazu;
                 i++;
                 if(i>9){//9＝9000ミリ秒後に停止
